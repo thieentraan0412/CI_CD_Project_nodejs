@@ -13,7 +13,9 @@ app.get('/', (req, res) => {
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
-
+app.get('/test', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 // GET /dashboard - Returns a beautiful HTML dashboard page
 app.get('/dashboard', (req, res) => {
   res.status(200).send(`<!DOCTYPE html>
