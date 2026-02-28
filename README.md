@@ -20,7 +20,8 @@ npm install
 # Start server (production)
 npm start
 
-# Start server (development with auto-reload)
+# Start server (develo 
+#pment with auto-reload)
 npm run dev
 
 # Run tests
