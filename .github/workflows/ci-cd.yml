@@ -43,10 +43,19 @@ jobs:
 
     steps:
       - name: Trigger Render Deploy Hook
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
-          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" \
+          if [ -z "$DEPLOY_HOOK" ]; then
+            echo "⚠️  RENDER_DEPLOY_HOOK_URL secret is not set – skipping deploy."
+            echo "   Add it at: GitHub repo → Settings → Secrets → RENDER_DEPLOY_HOOK_URL"
+            exit 0
+          fi
+          echo "🚀 Triggering Render deploy..."
+          curl -X POST "$DEPLOY_HOOK" \
             --fail \
             -o /dev/null \
             -s
+          echo "✅ Deploy triggered successfully!"
         # To set up: Render Dashboard → Your Service → Settings → Deploy Hook
         # Copy the URL and add it as a GitHub Secret: RENDER_DEPLOY_HOOK_URL
